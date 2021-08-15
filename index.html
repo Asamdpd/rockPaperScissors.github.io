@@ -2,9 +2,58 @@
 <html lang="en">
 <head>
     <title>Rock Paper Scissors</title>
-    <script src="index.js"></script>
+    <script src="index.js" defer></script>
+    <link rel="stylesheet" href="rps.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
 </head>
 <body>
     
+    <!-- <div class="container">
+        <div class="rock">        
+            <img src="images/rock.png">
+            <span id="rock"><label>Rock</label></span>
+        </div>
+
+        
+            
+        
+
+        <div class="paper">
+            <span id="paper">
+                <label>Paper</label>
+            </span>
+
+            <img src="images/paper.png">
+        </div>
+
+        <div class="scissors">
+            <span id="scissors">
+                <label>Scissors</label>
+            </span>
+
+            <img src="images/scissors.png">
+        </div>
+
+        <div class="score">
+            <label id="playerScore">Player Score: 0</label>
+            <label id="computerScore">Computer Score: 0</label>
+        </div>
+
+    </div> -->
+
+    <div class="grid-container">
+        <div class="grid-item"><label>Rock</label></div>
+        <div class="grid-item"><label>Paper</label></div>
+        <div class="grid-item"><label>Scissors</label></div>  
+        <div class="grid-item"><img id="rockImage" src="images/rock.png"></div>
+        <div class="grid-item"><img id="paperImage" src="images/paper.png"></div>
+        <div class="grid-item"><img id="scissorsImage" src="images/scissors.png"></div>  
+        <div class="grid-item" id="plScore">Player Score: 0</div>
+        <div class="grid-item" id="text">Make Your Choice</div>
+        <div class="grid-item" id="comScore">Computer Score: 0</div>
+      </div>
+
 </body>
 </html>
