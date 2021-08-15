@@ -1,0 +1,60 @@
+*{
+    margin: 0 0 0 0;
+}
+body {
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(128,128,228,1) 41%, rgba(0,212,255,1) 100%);
+}
+img:hover {
+   
+        -moz-box-shadow: 0 0 3px ;
+        -webkit-box-shadow: 0 0 3px rgb(26, 138, 172);
+        box-shadow: 0 0 3px rgb(26, 138, 172);
+    
+}
+#rockImage{
+ height: 4em;
+ width: 4em;
+}
+
+#paperImage{
+    height: 4em;
+    width: 4em;
+   }
+
+#scissorsImage{
+    height: 4em;
+    width: 4em;
+   }
+
+#computerScore{
+    position:absolute;                 
+    font-size: 2.5rem;                       
+    right:0;
+    font-family: 'Righteous', cursive;
+}
+
+#playerScore{
+    position:absolute;                 
+    font-size: 2.5rem; 
+    font-family: 'Righteous',   'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;                      
+    
+}
+
+.grid-container {
+    margin: auto;
+    margin-top: 10%;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 2px;
+  }
+  .grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+
+    padding: 10px;
+    
+    font-size: 30px;
+    text-align: center;
+  }
+
+  

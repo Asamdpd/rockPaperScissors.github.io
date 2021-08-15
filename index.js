@@ -2,6 +2,8 @@
 let rounds = 5
 let playerWins = 0;
 let computerWins = 0;
+let playerChoice = "";
+let computerChoice = "";
 // let playerSelection = "rock"
 
 //create a function called computerPlay that would return either Rock, Paper or Scissors, do that by putting these
@@ -9,103 +11,154 @@ let computerWins = 0;
 function computerPlay(){
     const compChoice = ["rock", "paper", "scissors"]
     return compChoice[Math.floor(Math.random() * 3)]
+    
 }
 
-//created a function that would play out a round of rock paper scissors by writing a function that takes two params
-//the first one being playerSelection and the second one computerSelection, the computerSelection param should be 
-//assigned the value that is being returned from the computerPlay function. The playerSelection value 
-//should be taken from prompt. Return a string with the result of the round
-//Also create a variable that would count how many wins the player and the computer have
-function round(computerSelection){
-    if(computerWins === 5){
-        console.log("YOU LOSE")
-        return
-    }
-    if(playerWins === 5){
-        console.log("YOU WIN");
-        return 
-    }
+function playAgain(){
 
-    const choice = prompt("Write your choice, type either 'Rock', 'Paper' or 'Scissors'")
-    const lower = choice.toLowerCase();
+    const div = document.createElement('div')
+    div.className = "grid-item";
+    const content = document.createTextNode("Play Again");
+    div.appendChild(content)
+    document.body.appendChild(div)
 
-    if( !(lower == 'rock' || lower == 'paper' || lower == 'scissors') ){
-        console.log('Please write a valid option');
-        round()
-    } 
+    div.addEventListener("click", (e) => {
+        playerWins = 0;
+        computerWins = 0;
+        document.querySelector('div[id="plScore"]').innerHTML = `Player Score: ${playerWins}`
+        document.querySelector('div[id="comScore"]').innerHTML = `Computer Score: ${computerWins}`
+        document.querySelector('div[id="text"]').innerHTML = "Make Your Choice";
+        div.remove()
 
-    //where choice is rock
-    switch (true){
-        case (lower === "rock" && computerSelection === "rock"):
-            console.log("Computer chose Rock!");
-            console.log("DRAW");
-            break;
-        case (lower === "rock" && computerSelection === "paper"):
-            console.log("Computer chose Paper!");
-            console.log("You Lose! Paper beats Rock")
-            computerWins++;
-            break;
-        case (lower === "rock" && computerSelection === "scissors"):
-            console.log("Computer chose Scissors!");
-            console.log("You Win! Rock beats Scissors");
-            playerWins++;
-            break;
+    })
 
-        //where choice is paper
-        case (lower === "paper" && computerSelection === "rock"):
-            console.log("Computer chose Rock!");
-            console.log("You Win! Paper beats Rock");
-            playerWins++;
-            break;
-        case (lower === "paper" && computerSelection === "paper"):
-            console.log("Computer chose Paper!");
-            console.log("DRAW");
-            break;
-        case (lower === "paper" && computerSelection === "scissors"):
-            console.log("Computer chose Scissors!");
-            console.log("You Lose! Scissors beats Paper");
-            computerWins++
-            break;
-
-        //where choice is scissors
-        case (lower === "scissors" && computerSelection === "rock"):
-            console.log("Computer chose Rock!");
-            console.log("You Lose! Rock beats Scissors");
-            computerWins++;
-            break;
-        case (lower === "scissors" && computerSelection === "scissors"):
-            console.log("Computer chose Scissors!");
-            console.log("DRAW");
-            break;
-        case (lower === "scissors" && computerSelection === "paper"):
-            console.log("Computer chose Paper!");
-            console.log("You Win! Scissors beats Paper");
-            playerWins++
-            break;
-    }
-    console.log(`Computer: ${computerWins} Player: ${playerWins}`)
-
-  
+    
 }
 
 
-//create a new functiob "game" that would repeat the previous function 5 times, use loop to do that
 
-function game(){
+const rock = document.querySelector('img[id="rockImage"]')
 
-    for(i = 0; i = 1;){
-        if(computerWins === 5 || playerWins === 5){
-            i++;
-            break;
-        }
-        round(computerPlay())
-    }
-    console.log("OVERALL SCORE")
-    console.log(`Computer: ${computerWins} Player: ${playerWins}`)
+rock.addEventListener("click", () => {
+playerChoice = "rock";
+compare(playerChoice, compareRock(computerPlay()))
+})
 
+const paper = document.querySelector('img[id="paperImage"]')
+paper.addEventListener("click", () => {
+playerChoice = "paper"
+
+if(!(playerWins === 5 || computerWins === 5)){
+    comparePaper(computerPlay()) && compareScissors(computerPlay()) && compareRock(computerPlay()) 
 } 
 
-game()
 
 
+})
+
+
+const scissors = document.querySelector('img[id="scissorsImage"]')
+
+scissors.addEventListener("click", () => {
+playerChoice = "scissors"
+compareScissors(computerPlay())
+})
+
+//check if player or computer won
+function win(){
+    if(playerWins === 5){
+        document.querySelector('div[id="text"]').innerHTML = "YOU WON!";
+    } else if(computerWins === 5){
+        document.querySelector('div[id="text"]').innerHTML = "COMPUTER WON!" 
+    } 
+
+    if(playerWins === 5 || computerWins === 5){
+        playAgain()
+    }
+    
+}
+
+
+function compareRock(computerChoice){
+    if((playerWins === 5 || computerWins === 5)){
+        return;
+    }
+    switch(computerChoice){
+        case "rock":
+            document.querySelector('div[id="text"]').innerHTML = "Draw!"
+            break;
+        case "scissors":
+            playerWins++;
+            document.querySelector('div[id="text"]').innerHTML = "You Win!";
+            document.querySelector('div[id="plScore"]').innerHTML = `Player Score: ${playerWins}`;
+            
+            break;
+        case "paper":
+            computerWins++;
+            document.querySelector('div[id="text"]').innerHTML = "You Lose!";
+            document.querySelector('div[id="comScore"]').innerHTML = `Computer Score: ${computerWins}`;
+            
+            break
+        default: return;
+    }
+
+    win()
+      
+}
+
+function comparePaper(computerChoice){
+
+    if((playerWins === 5 || computerWins === 5)){
+        return;
+    }
+    
+    switch(computerChoice){
+        case "paper":
+            document.querySelector('div[id="text"]').innerHTML = "Draw!"
+            break;
+        case "rock":
+            playerWins++
+            document.querySelector('div[id="text"]').innerHTML = "You Win!";
+            document.querySelector('div[id="plScore"]').innerHTML = `Player Score: ${playerWins}`
+            
+            break;
+        case "scissors":
+            computerWins++;
+            document.querySelector('div[id="text"]').innerHTML = "You Lose!";
+            document.querySelector('div[id="comScore"]').innerHTML = `Computer Score: ${computerWins}`;
+            
+            break
+        default: return;
+    }
+    win()
+}
+
+function compareScissors(computerChoice){
+    if((playerWins === 5 || computerWins === 5)){
+        return;
+    }
+    switch(computerChoice){
+        case "scissors":
+            document.querySelector('div[id="text"]').innerHTML = "Draw!"
+            break;
+        case "paper":
+            playerWins++;
+            document.querySelector('div[id="text"]').innerHTML = "You Win!";
+            document.querySelector('div[id="plScore"]').innerHTML = `Player Score: ${playerWins}`
+            
+            break;
+        case "rock":
+            computerWins++;
+            document.querySelector('div[id="text"]').innerHTML = "You Lose!";
+            document.querySelector('div[id="comScore"]').innerHTML = `Computer Score: ${computerWins}`;
+            break
+        default: return;
+    }
+    win()
+}
+
+function compare(){
+    computerChoice = computerPlay();
+    
+}
 
